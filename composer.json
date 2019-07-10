@@ -8,8 +8,8 @@
         }
     ]
     , "require": {
-        "poirot/skeleton": "dev-devel"
-        , "poirot/mod-assetmanager": "dev-devel"
+        "poirot/skeleton": "dev-master"
+        , "poirot/mod-assetmanager": "dev-master"
     }
     , "autoload"  : {
         "psr-4": {
