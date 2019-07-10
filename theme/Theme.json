@@ -1,0 +1,26 @@
+{
+  "Name": "Default",
+  "Description": "This is default Poirot Theme Include Samples and Abilities That Theme Module Will Provide.",
+  "Layout": "layout.main",
+  "Exceptions": {
+    "Exception": "error/error",
+    "Poirot\\Application\\Exception\\ErrorRouteNotMatch": ["error/404", "layout.blank"]
+  },
+  "Assets": {
+    "path": "/asset",
+    "resolver": {
+      "@compiled": "./www/assets.php"
+    }
+  },
+  "Settings": {
+    "@include": "Settings.json"
+  },
+  "Autoload": {
+    "files": [
+      "src\\path_to_file.php"
+    ],
+    "psr-4": {
+      "\\Theme\\Default": "src\\"
+    }
+  }
+}

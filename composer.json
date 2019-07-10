@@ -1,0 +1,19 @@
+{
+    "name": "poirot/mod-themes"
+    , "description": "Template Management."
+    , "authors": [
+        {
+            "name": "Payam Naderi"
+            , "email": "naderi.payam@gmail.com"
+        }
+    ]
+    , "require": {
+        "poirot/skeleton": "dev-devel"
+        , "poirot/mod-assetmanager": "dev-devel"
+    }
+    , "autoload"  : {
+        "psr-4": {
+            "Module\\Themes\\": "src/"
+        }
+    }
+}
