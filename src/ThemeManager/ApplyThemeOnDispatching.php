@@ -1,6 +1,7 @@
 <?php
 namespace Module\Themes\ThemeManager;
 
+use Module\Foundation\Services\PathService\PathAction;
 use function Poirot\Std\flatten;
 use Poirot\Config\Config;
 use Poirot\Loader\LoaderNamespaceStack;
@@ -9,6 +10,7 @@ use Module\Foundation\View\ViewModelResolver;
 use Module\AssetManager\Resolvers\AggregateResolver;
 use Module\AssetManager\Interfaces\iAssetsResolver;
 use Module\AssetManager\Resolvers\PathPrefixResolver;
+use Poirot\Std\Type\StdString;
 
 
 class ApplyThemeOnDispatching
@@ -90,11 +92,23 @@ class ApplyThemeOnDispatching
                 , iAssetsResolver::class , flatten($resolver)
             ));
 
+        $path = '';
         if ( isset($assets['path']) ) {
             $path = '/' . ltrim($assets['path'], '/');
             $resolver = (new PathPrefixResolver($resolver))
                 ->setPath($path);
         }
+
+        if (! \Module\Foundation\Actions::path()->hasPath('theme') )
+            \Module\Foundation\Actions::path()
+                ->setPath(
+                    'theme'
+                    , StdString::safeJoin('/', ...[
+                        '$basePath'
+                        , $path
+                    ])
+                    , true
+                );
 
 
         $this->assetResolver->attach($resolver);

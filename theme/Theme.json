@@ -7,7 +7,7 @@
     "Poirot\\Application\\Exception\\ErrorRouteNotMatch": ["error/404", "layout.blank"]
   },
   "Assets": {
-    "path": "/asset",
+    "path": "/assets",
     "resolver": {
       "@compiled": "./www/assets.php"
     }
