@@ -85,32 +85,36 @@ class ApplyThemeOnDispatching
             return $this;
 
 
-        $resolver = $assets['resolver'];
-        if (! $resolver instanceof iAssetsResolver )
-            throw new \InvalidArgumentException(sprintf(
-                'Theme Configuration On "Assets.resolver" should provide value instance of %s; given "%s".'
-                , iAssetsResolver::class , flatten($resolver)
-            ));
+        // Assets Resolver
+        //
+        $path     = $assets['path'] ?? '';
+        $resolver = null;
+        if (isset($assets['resolver'])) {
+            $resolver = $assets['resolver'];
+            if (! $resolver instanceof iAssetsResolver )
+                throw new \InvalidArgumentException(sprintf(
+                    'Theme Configuration On "Assets.resolver" should provide value instance of %s; given "%s".'
+                    , iAssetsResolver::class , flatten($resolver)
+                ));
 
-        $path = '';
-        if ( isset($assets['path']) ) {
-            $path = '/' . ltrim($assets['path'], '/');
+
             $resolver = (new PathPrefixResolver($resolver))
                 ->setPath($path);
+
+
+            // will serve from local address; otherwise it might be a remote address
+            // to server assets from.
+            $path = StdString::safeJoin('/', ...[
+                '$basePath'
+                , $path
+            ]);
+
+            $this->assetResolver->attach($resolver);
         }
 
+        
         if (! \Module\Foundation\Actions::path()->hasPath('theme') )
             \Module\Foundation\Actions::path()
-                ->setPath(
-                    'theme'
-                    , StdString::safeJoin('/', ...[
-                        '$basePath'
-                        , $path
-                    ])
-                    , true
-                );
-
-
-        $this->assetResolver->attach($resolver);
+                ->setPath('theme', $path,true);
     }
 }
