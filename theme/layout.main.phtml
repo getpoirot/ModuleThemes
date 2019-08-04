@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php echo $this->capture('inc.header.phtml') ?>
+    <?= $this->capture('inc.header.phtml') ?>
 </head>
 <body>
 <header class="navbar navbar-inverse navbar-fixed-top wet-asphalt" role="banner">
@@ -13,18 +13,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<?php echo \Module\HttpFoundation\Actions::url('main/home') ?>">
+            <a class="navbar-brand" href="<?= \Module\HttpFoundation\Actions::url('main/home') ?>">
                 <h4>Poirot Framework</h4>
             </a>
         </div>
 
-        <?php echo $this->capture('inc.navigation-menu.phtml') ?>
+        <?= $this->capture('inc.navigation-menu.phtml') ?>
 
     </div>
 </header>
 
-<?php echo $content; ?>
+<?= $content; ?>
 
-<?php echo $this->capture('inc.footer.phtml') ?>
+<?= $this->capture('inc.footer.phtml') ?>
 </body>
 </html>

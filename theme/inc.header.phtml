@@ -5,19 +5,29 @@
 
 <?= \Module\HttpFoundation\Actions::htmlHeadTitle('Poirot Framework') ?>
 
-<link href="<?= \Module\Foundation\Actions::path('theme') ?>/css/bootstrap.min.css" rel="stylesheet">
-<link href="<?= \Module\Foundation\Actions::path('theme') ?>/css/font-awesome.min.css" rel="stylesheet">
-<link href="<?= \Module\Foundation\Actions::path('theme') ?>/css/prettyPhoto.css" rel="stylesheet">
-<link href="<?= \Module\Foundation\Actions::path('theme') ?>/css/animate.css" rel="stylesheet">
-<link href="<?= \Module\Foundation\Actions::path('theme') ?>/css/main.css" rel="stylesheet">
-<!--[if lt IE 9]>
-<script src="<?= \Module\Foundation\Actions::path('theme') ?>/js/html5shiv.js"></script>
-<script src="<?= \Module\Foundation\Actions::path('theme') ?>/js/respond.min.js"></script>
-<![endif]-->
-<link rel="shortcut icon" href="<?= \Module\Foundation\Actions::path('theme') ?>/images/ico/favicon.ico">
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?= \Module\Foundation\Actions::path('theme') ?>/images/ico/apple-touch-icon-144-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?= \Module\Foundation\Actions::path('theme') ?>/images/ico/apple-touch-icon-114-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?= \Module\Foundation\Actions::path('theme') ?>/images/ico/apple-touch-icon-72-precomposed.png">
-<link rel="apple-touch-icon-precomposed" href="<?= \Module\Foundation\Actions::path('theme') ?>/images/ico/apple-touch-icon-57-precomposed.png">
+<?php \Module\HttpFoundation\Actions::htmlLink()
+    ->group()
+    ->withPathPrefix(\Module\Foundation\Actions::path('theme'))
+    ->withOffsetIota(-100)
+    ->attachFile('css/bootstrap.min.css')
+    ->attachFile('css/font-awesome.min.css')
+    ->attachFile('css/prettyPhoto.css')
+    ->attachFile('css/animate.css')
+    ->attachFile('css/main.css')
+    // Icons
+    ->attachFile('images/ico/favicon.ico', null, [], 'shortcut icon')
+    ->attachFile('images/ico/apple-touch-icon-144-precomposed.png', null, ['sizes'=>'144x144'], 'apple-touch-icon-precomposed')
+    ->attachFile('images/ico/apple-touch-icon-114-precomposed.png', null, ['sizes'=>'114x114'], 'apple-touch-icon-precomposed')
+    ->attachFile('images/ico/apple-touch-icon-72-precomposed.png', null, ['sizes'=>'72x72'], 'apple-touch-icon-precomposed')
+    ->attachFile('images/ico/apple-touch-icon-57-precomposed.png', null, [], 'apple-touch-icon-precomposed')
+;
 
-<?= \Module\HttpFoundation\Actions::htmlLink() ?>
+print \Module\HttpFoundation\Actions::htmlLink();
+
+print \Module\HttpFoundation\Actions::htmlScript('head')
+    ->group()
+    ->withPathPrefix(\Module\Foundation\Actions::path('theme'))
+    ->withOffsetIota(-100)
+        ->attachFile('js/html5shiv.js', null, ['conditional' => 'lt IE 9'])
+        ->attachFile('js/respond.min.js', null, ['conditional' => 'lt IE 9'])
+;

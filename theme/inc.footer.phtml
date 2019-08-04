@@ -14,6 +14,13 @@
     </div>
 </footer>
 
-<script src="<?php echo \Module\Foundation\Actions::path('theme') ?>/js/jquery.js"></script>
-<script src="<?php echo \Module\Foundation\Actions::path('theme') ?>/js/bootstrap.min.js"></script>
-<script src="<?php echo \Module\Foundation\Actions::path('theme') ?>/js/main.js"></script>
+<?php \Module\HttpFoundation\Actions::htmlScript()
+    ->group()
+    ->withPathPrefix( \Module\Foundation\Actions::path('theme') )
+    ->withOffsetIota(-100)
+    ->attachFile('js/jquery.js')
+    ->attachFile('js/bootstrap.min.js')
+    ->attachFile('js/main.js')
+;
+
+echo \Module\HttpFoundation\Actions::htmlScript();
